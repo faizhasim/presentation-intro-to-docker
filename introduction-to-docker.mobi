@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Mohd Faiz Hasim" />
+  <title>Introduction to Docker</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">Introduction to Docker</h1>
+<h2 class="author">Mohd Faiz Hasim</h2>
+<h3 class="date">faiz.hasim@servicerocket.com • faizhasim@gmail.com</h3>
+</div>
+<hr />
+<p>Some Info</p>
+<ul>
+<li>Also available as <a href="introduction-to-docker.pdf">PDF</a>, <a href="introduction-to-docker.epub">EPUB</a> and <a href="introduction-to-docker.mobi">MOBI</a> formats.</li>
+<li>Hosted at <a href="https://github.com/faizhasim/presentation-intro-to-docker">Github</a>.</li>
+<li>Mistakes? Improvements? Make me a pull request.</li>
+</ul>
+<h1 id="what-is-docker">What is Docker?</h1>
+<hr />
+<h2 id="pretty-much-a-lightweight-virtual-machine">Pretty much a lightweight Virtual Machine</h2>
+<ul>
+<li>Own process space</li>
+<li>Own network interface</li>
+<li>Can run stuff as root</li>
+<li>Implemented using <a href="http://www.ubuntu.com/cloud/tools/lxd">LXD</a> - new &quot;hypervisor&quot;</li>
+</ul>
+<hr />
+<div class="figure">
+<img src="images/vm-vs-container.png" alt="VM vs Container - From Docker" /><p class="caption">VM vs Container - From Docker</p>
+</div>
+<hr />
+<div class="figure">
+<img src="images/docker-system.png" alt="Docker System - From Docker" /><p class="caption">Docker System - From Docker</p>
+</div>
+<hr />
+<div class="figure">
+<img src="images/changes-and-update.png" alt="Changes and Update - From Docker" /><p class="caption">Changes and Update - From Docker</p>
+</div>
+<h1 id="what-the-big-fuss">What the big fuss?</h1>
+<h2 id="shipment">Shipment</h2>
+<ul>
+<li>Works on my machine</li>
+<li>Works on your machine</li>
+<li>Works on staging</li>
+<li>Works on production</li>
+</ul>
+<h2 id="how-would-you-treat-code">How would you treat code?</h2>
+<ul>
+<li>Push your source code on Github/Stash/Bitbucket?</li>
+<li>Peer review on your code?</li>
+<li>Share your source code?</li>
+</ul>
+<h2 id="docker-works-like-git">Docker works like Git</h2>
+<ul>
+<li>Push your <code>Dockerfile</code> to Dockerhub (or your private Docker registry)</li>
+<li>Peer review your Docker arhictecture.</li>
+<li>Share your Dockefile via Dockerhub/private Docker registry or build yourself from SCM</li>
+</ul>
+<h2 id="run-everywhere">Run everywhere</h2>
+<ul>
+<li>Ubuntu/CentOS/Debian/BusyBox</li>
+<li>Physical or Virtual, chould or onpremise</li>
+</ul>
+<h2 id="run-anything">Run anything</h2>
+<ul>
+<li>Anything that your can run on Linux</li>
+<li>In other words, if you can install stuff on your Linux box, you can install on Docker</li>
+</ul>
+<h1 id="pulling-busybox-and-play-with-it">Pulling busybox and play with it</h1>
+<hr />
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">docker</span> search busybox</code></pre>
+<p><code>https://registry.hub.docker.com/search?q=busybox</code></p>
+<hr />
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">docker</span> pull busybox
+
+<span class="kw">docker</span> pull node:latest</code></pre>
+<hr />
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">docker</span> images</code></pre>
+<hr />
+<pre class="sourceCode bash"><code class="sourceCode bash">
+<span class="kw">docker</span> run busybox ps aux
+
+<span class="kw">docker</span> run -i -t busybox /bin/sh</code></pre>
+<h1 id="build-hello-world-in-nodejs">Build Hello World in NodeJS</h1>
+<hr />
+<p>Running node:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">docker</span> run -it --rm --name hello-world-node node:latest node</code></pre>
+<hr />
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">mkdir</span> helloworld
+
+<span class="kw">touch</span> helloworld/index.js</code></pre>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> express = <span class="fu">require</span>(<span class="st">&#39;express&#39;</span>);
+<span class="kw">var</span> app = <span class="fu">express</span>();
+
+<span class="ot">app</span>.<span class="fu">get</span>(<span class="st">&#39;/&#39;</span>, <span class="kw">function</span> (req, res) {
+  <span class="ot">res</span>.<span class="fu">send</span>(<span class="st">&#39;Hello World!&#39;</span>)
+});
+
+<span class="kw">var</span> server = <span class="ot">app</span>.<span class="fu">listen</span>(<span class="dv">3000</span>, <span class="kw">function</span> () {
+  <span class="kw">var</span> host = <span class="ot">server</span>.<span class="fu">address</span>().<span class="fu">address</span>;
+  <span class="kw">var</span> port = <span class="ot">server</span>.<span class="fu">address</span>().<span class="fu">port</span>;
+  <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&#39;Example app listening at http://%s:%s&#39;</span>, host, port);
+});</code></pre>
+<hr />
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">touch</span> helloworld/Dockerfile</code></pre>
+<pre class="Dockerfile"><code>FROM       node:latest
+MAINTAINER Mohd Faiz Hasim
+
+ENV APP_PATH /user/src/myapp
+
+EXPOSE 3000
+
+ADD index.js $APP_PATH/index.js
+RUN npm install --save express
+
+WORKDIR $APP_PATH
+
+CMD node index.js
+</code></pre>
+<hr />
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">docker</span> build -t faizhasim/helloworld helloworld/</code></pre>
+<hr />
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">docker</span> run -p=80:3000 -ti --rm --name hello-world-node faizhasim/helloworld</code></pre>
+<h1 id="orchestration-with-fig">Orchestration with <a href="fig.sh">Fig</a></h1>
+<hr />
+<p><code>touch fig.yml</code></p>
+<hr />
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">helloworld:</span>
+  <span class="fu">build:</span> helloworld/.
+  <span class="fu">ports:</span>
+    <span class="kw">-</span> <span class="st">&quot;80:3000&quot;</span></code></pre>
+<hr />
+<p><code>fig build</code></p>
+<hr />
+<p><code>fig up</code></p>
+<h1 id="where-should-i-go-next">Where should I go next?</h1>
+<h2 id="for-motivation...">For motivation...</h2>
+<p>Checkout <a href="https://intranet.servicerocket.com/pages/viewpage.action?pageId=29819537">How we orchestrates 8 Docker containers to support our Learndot build pipeline?</a></p>
+<hr />
+<h3 id="going-forward">Going forward</h3>
+<ul>
+<li>Try to <code>link</code> your hello world container to read value from <code>redis</code> container.</li>
+<li>Checkout examples from <a href="fig.sh">Fig</a> website.</li>
+<li>Ask Shuaib to demo to you.</li>
+</ul>
+<hr />
+<h3 id="recommended-reads">Recommended reads</h3>
+<ul>
+<li>The Docker Book by James Turnbull</li>
+<li>Docker documentation website</li>
+</ul>
+<hr />
+<h3 id="some-interesting-facts">Some interesting facts</h3>
+<ul>
+<li>This slides is build using docker!</li>
+<li>Fig will be part of official Docker orchestration tool</li>
+<li>You can deploy Docker using Amazon Elastic Beanstalk</li>
+</ul>
+<hr />
+<blockquote>
+<p>Docker is not magic. You create magic around Docker.</p>
+</blockquote>
+</body>
+</html>

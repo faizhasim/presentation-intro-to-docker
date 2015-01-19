@@ -3,7 +3,7 @@
 ## Shipment
 
 - Works on my machine
-- Works on my your machine
+- Works on your machine
 - Works on staging
 - Works on production
 

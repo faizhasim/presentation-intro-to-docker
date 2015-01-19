@@ -15,6 +15,6 @@ docker run -v `pwd`:/source jagregory/pandoc -t revealjs -s /source/slides.md \
   | sed "s/902000/FFB412/g" \
   > index.html
 
-docker run -v `pwd`:/source jagregory/pandoc  -s /source/slides.md -o /source/functional-programming.pdf  --latex-engine=xelatex
-docker run -v `pwd`:/source jagregory/pandoc  -s /source/slides.md -o /source/functional-programming.epub  --latex-engine=xelatex
-docker run -v `pwd`:/source jagregory/pandoc  -s /source/slides.md -o /source/functional-programming.mobi  --latex-engine=xelatex
+docker run -v `pwd`:/source jagregory/pandoc  -s /source/slides.md -o /source/introduction-to-docker.pdf  --latex-engine=xelatex
+docker run -v `pwd`:/source jagregory/pandoc  -s /source/slides.md -o /source/introduction-to-docker.epub  --latex-engine=xelatex
+docker run -v `pwd`:/source jagregory/pandoc  -s /source/slides.md -o /source/introduction-to-docker.mobi  --latex-engine=xelatex
