@@ -1,0 +1,4 @@
+helloworld:
+  build: helloworld/.
+  ports:
+    - "80:3000"
