@@ -28,7 +28,7 @@
 
 ## Run anything
 
-- Anything that your can run on Linux
+- Anything that you can run on Linux
 - In other words, if you can install stuff on your Linux box, you can install on Docker
 
 
