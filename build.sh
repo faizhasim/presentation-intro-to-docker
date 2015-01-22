@@ -13,6 +13,7 @@ docker run -v `pwd`:/source jagregory/pandoc -t revealjs -s /source/slides.md \
   | sed "s/06287e/88A8F9/g" \
   | sed "s/4070a0/8EC3F9/g" \
   | sed "s/902000/FFB412/g" \
+  | sed "s/transition: Reveal.getQueryHash().transition || 'default'/transition: Reveal.getQueryHash().transition || 'linear'/g" \
   > index.html
 
 docker run -v `pwd`:/source jagregory/pandoc  -s /source/slides.md -o /source/introduction-to-docker.pdf  --latex-engine=xelatex
