@@ -7,7 +7,9 @@ fi
 
 cat markdown/*.md > slides.md
 
-docker run -v `pwd`:/source jagregory/pandoc -t revealjs -s /source/slides.md \
+docker pull jagregory/pandoc
+
+docker run --rm -v `pwd`:/source jagregory/pandoc -t revealjs -s /source/slides.md \
   | sed "s/simple.css/default.css/g" \
   | sed "s/007020/40B261/g" \
   | sed "s/06287e/88A8F9/g" \
@@ -16,6 +18,6 @@ docker run -v `pwd`:/source jagregory/pandoc -t revealjs -s /source/slides.md \
   | sed "s/transition: Reveal.getQueryHash().transition || 'default'/transition: Reveal.getQueryHash().transition || 'linear'/g" \
   > index.html
 
-docker run -v `pwd`:/source jagregory/pandoc  -s /source/slides.md -o /source/introduction-to-docker.pdf  --latex-engine=xelatex
-docker run -v `pwd`:/source jagregory/pandoc  -s /source/slides.md -o /source/introduction-to-docker.epub  --latex-engine=xelatex
-docker run -v `pwd`:/source jagregory/pandoc  -s /source/slides.md -o /source/introduction-to-docker.mobi  --latex-engine=xelatex
+docker run --rm -v `pwd`:/source jagregory/pandoc  -s /source/slides.md -o /source/introduction-to-docker.pdf  --latex-engine=xelatex
+docker run --rm -v `pwd`:/source jagregory/pandoc  -s /source/slides.md -o /source/introduction-to-docker.epub  --latex-engine=xelatex
+docker run --rm -v `pwd`:/source jagregory/pandoc  -s /source/slides.md -o /source/introduction-to-docker.mobi  --latex-engine=xelatex
